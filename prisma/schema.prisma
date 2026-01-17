@@ -1,0 +1,108 @@
+// Prisma Schema for Inventory Management System
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Enum for inventory outflow strategies
+enum InventoryStrategy {
+  FIFO
+  FEFO
+  BATCH
+}
+
+// Business model - stores business information and inventory config
+model Business {
+  id        String            @id @default(uuid())
+  name      String
+  outMode   InventoryStrategy @default(FIFO) @map("out_mode")
+  createdAt DateTime          @default(now()) @map("created_at")
+  updatedAt DateTime          @updatedAt @map("updated_at")
+
+  // Relations
+  sales Sale[]
+
+  @@map("businesses")
+}
+
+// Product model
+model Product {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  inventoryBatches InventoryBatch[]
+  saleItems        SaleItem[]
+
+  @@map("products")
+}
+
+// InventoryBatch model - represents stock entries
+model InventoryBatch {
+  id                String    @id @default(uuid())
+  productId         String    @map("product_id")
+  batchNo           String    @map("batch_no")
+  quantity          Int
+  remainingQuantity Int       @map("remaining_quantity")
+  purchaseDate      DateTime  @map("purchase_date")
+  expiryDate        DateTime? @map("expiry_date")
+  costPrice         Decimal   @map("cost_price") @db.Decimal(10, 2)
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  product   Product    @relation(fields: [productId], references: [id])
+  saleItems SaleItem[]
+
+  // Indexes for efficient querying
+  @@index([productId, purchaseDate])
+  @@index([productId, expiryDate])
+  @@index([productId, batchNo])
+  @@index([remainingQuantity])
+  @@map("inventory_batches")
+}
+
+// Sale model - represents a sale transaction
+model Sale {
+  id         String   @id @default(uuid())
+  businessId String   @map("business_id")
+  totalItems Int      @map("total_items")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  // Relations
+  business  Business   @relation(fields: [businessId], references: [id])
+  saleItems SaleItem[]
+
+  @@index([businessId])
+  @@map("sales")
+}
+
+// SaleItem model - represents individual items in a sale (deductions)
+model SaleItem {
+  id               String   @id @default(uuid())
+  saleId           String   @map("sale_id")
+  productId        String   @map("product_id")
+  inventoryBatchId String   @map("inventory_batch_id")
+  quantity         Int
+  costPrice        Decimal  @map("cost_price") @db.Decimal(10, 2)
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  // Relations
+  sale           Sale           @relation(fields: [saleId], references: [id])
+  product        Product        @relation(fields: [productId], references: [id])
+  inventoryBatch InventoryBatch @relation(fields: [inventoryBatchId], references: [id])
+
+  @@index([saleId])
+  @@index([productId])
+  @@index([inventoryBatchId])
+  @@map("sale_items")
+}

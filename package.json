@@ -1,0 +1,38 @@
+{
+  "name": "hancod-machinetest",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "inventory",
+    "management",
+    "nodejs",
+    "express",
+    "prisma"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "Production-grade inventory management system with FIFO, FEFO, and BATCH strategies",
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "@types/pg": "^8.16.0",
+    "nodemon": "^3.1.0",
+    "prisma": "^7.2.0"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.2.0",
+    "@prisma/client": "^7.2.0",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.0",
+    "pg": "^8.17.1",
+    "uuid": "^9.0.0"
+  }
+}
