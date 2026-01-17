@@ -2,11 +2,7 @@
 const prisma = require("../config/db");
 const ApiError = require("../utils/ApiError");
 
-/**
- * Create a new product
- * @param {Object} data - Product data
- * @returns {Object} Created product
- */
+// Create a new product
 const createProduct = async (data) => {
   const { code, name, description } = data;
 
@@ -28,11 +24,7 @@ const createProduct = async (data) => {
   });
 };
 
-/**
- * Get product by ID or code
- * @param {String} identifier - Product ID or code
- * @returns {Object} Product
- */
+// Get product by ID or code
 const getProduct = async (identifier) => {
   let product = await prisma.product.findUnique({
     where: { id: identifier },
@@ -51,22 +43,14 @@ const getProduct = async (identifier) => {
   return product;
 };
 
-/**
- * Get all products
- * @returns {Array} List of products
- */
+// Get all products
 const getAllProducts = async () => {
   return prisma.product.findMany({
     orderBy: { createdAt: "desc" },
   });
 };
 
-/**
- * Update a product
- * @param {String} id - Product ID
- * @param {Object} data - Update data
- * @returns {Object} Updated product
- */
+// Update a product
 const updateProduct = async (id, data) => {
   await getProduct(id);
 

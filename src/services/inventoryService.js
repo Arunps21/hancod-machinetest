@@ -2,11 +2,7 @@
 const prisma = require("../config/db");
 const ApiError = require("../utils/ApiError");
 
-/**
- * Add inventory (stock entry/inward)
- * @param {Object} data - Inventory batch data
- * @returns {Object} Created inventory batch
- */
+// Add inventory (stock entry/inward)
 const addInventory = async (data) => {
   const { productId, batchNo, quantity, purchaseDate, expiryDate, costPrice } =
     data;
@@ -62,11 +58,7 @@ const addInventory = async (data) => {
   });
 };
 
-/**
- * Get inventory summary for a product
- * @param {String} productId - Product ID or code
- * @returns {Object} Inventory summary
- */
+// Get inventory summary for a product
 const getInventorySummary = async (productId) => {
   // Try to find product by ID or code
   let product = await prisma.product.findUnique({
@@ -112,10 +104,7 @@ const getInventorySummary = async (productId) => {
   };
 };
 
-/**
- * Get all inventory batches with available stock
- * @returns {Array} List of batches
- */
+// Get all inventory batches with available stock
 const getAllInventory = async () => {
   return prisma.inventoryBatch.findMany({
     where: {

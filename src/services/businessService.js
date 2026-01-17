@@ -3,11 +3,7 @@ const prisma = require("../config/db");
 const ApiError = require("../utils/ApiError");
 const { INVENTORY_STRATEGIES } = require("../config/constants");
 
-/**
- * Create a new business
- * @param {Object} data - Business data
- * @returns {Object} Created business
- */
+// Create a new business
 const createBusiness = async (data) => {
   const { name, outMode = INVENTORY_STRATEGIES.FIFO } = data;
 
@@ -19,11 +15,7 @@ const createBusiness = async (data) => {
   });
 };
 
-/**
- * Get business by ID
- * @param {String} businessId - Business ID
- * @returns {Object} Business
- */
+// Get business by ID
 const getBusinessById = async (businessId) => {
   const business = await prisma.business.findUnique({
     where: { id: businessId },
@@ -36,12 +28,7 @@ const getBusinessById = async (businessId) => {
   return business;
 };
 
-/**
- * Update inventory configuration (outflow strategy)
- * @param {String} businessId - Business ID
- * @param {String} outMode - Inventory strategy (FIFO, FEFO, BATCH)
- * @returns {Object} Updated business
- */
+// Update inventory configuration (outflow strategy)
 const updateInventoryConfig = async (businessId, outMode) => {
   // Validate strategy
   if (!Object.values(INVENTORY_STRATEGIES).includes(outMode)) {
@@ -59,10 +46,7 @@ const updateInventoryConfig = async (businessId, outMode) => {
   });
 };
 
-/**
- * Get all businesses
- * @returns {Array} List of businesses
- */
+// Get all businesses
 const getAllBusinesses = async () => {
   return prisma.business.findMany({
     orderBy: { createdAt: "desc" },

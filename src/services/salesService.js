@@ -4,11 +4,7 @@ const ApiError = require("../utils/ApiError");
 const { getStrategy } = require("../strategies");
 const businessService = require("./businessService");
 
-/**
- * Create a sale with atomic transaction
- * @param {Object} data - Sale data
- * @returns {Object} Sale with deductions
- */
+// Create a sale with atomic transaction
 const createSale = async (data) => {
   const { businessId, productId, quantity, batchNo } = data;
 
@@ -99,11 +95,7 @@ const createSale = async (data) => {
   return result;
 };
 
-/**
- * Get sale by ID
- * @param {String} saleId - Sale ID
- * @returns {Object} Sale with details
- */
+// Get sale by ID
 const getSaleById = async (saleId) => {
   const sale = await prisma.sale.findUnique({
     where: { id: saleId },
@@ -140,11 +132,7 @@ const getSaleById = async (saleId) => {
   };
 };
 
-/**
- * Get all sales for a business
- * @param {String} businessId - Business ID
- * @returns {Array} List of sales
- */
+// Get all sales for a business
 const getSalesByBusiness = async (businessId) => {
   const sales = await prisma.sale.findMany({
     where: { businessId },
