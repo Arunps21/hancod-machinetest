@@ -3,10 +3,7 @@ const inventoryService = require("../services/inventoryService");
 const { successResponse } = require("../utils/response");
 const { HTTP_STATUS } = require("../config/constants");
 
-/**
- * Add inventory (stock entry/inward)
- * POST /inventory/inward
- */
+// Add inventory (stock entry/inward)
 const addInventory = async (req, res, next) => {
   try {
     const {
@@ -43,10 +40,7 @@ const addInventory = async (req, res, next) => {
   }
 };
 
-/**
- * Get inventory summary for a product
- * GET /inventory/summary?product_id=P001
- */
+// Get inventory summary for a product
 const getInventorySummary = async (req, res, next) => {
   try {
     const { product_id } = req.query;
@@ -70,10 +64,7 @@ const getInventorySummary = async (req, res, next) => {
   }
 };
 
-/**
- * Get all inventory with available stock
- * GET /inventory
- */
+// Get all inventory with available stock
 const getAllInventory = async (req, res, next) => {
   try {
     const inventory = await inventoryService.getAllInventory();

@@ -1,12 +1,6 @@
 // Response Utilities
 
-/**
- * Send success response
- * @param {Object} res - Express response object
- * @param {Number} statusCode - HTTP status code
- * @param {String} message - Response message
- * @param {Object} data - Response data
- */
+// Send success response
 const successResponse = (
   res,
   statusCode = 200,
@@ -20,13 +14,7 @@ const successResponse = (
   });
 };
 
-/**
- * Send error response
- * @param {Object} res - Express response object
- * @param {Number} statusCode - HTTP status code
- * @param {String} message - Error message
- * @param {Array} errors - Array of error details
- */
+// Send error response
 const errorResponse = (
   res,
   statusCode = 500,
