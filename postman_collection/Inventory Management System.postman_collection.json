@@ -1,0 +1,497 @@
+{
+  "info": {
+    "_postman_id": "1c0d3d0c-5c6e-425b-a9f7-35bcbc8a0360",
+    "name": "Inventory Management System",
+    "description": "Production-grade inventory management API with FIFO, FEFO, and BATCH strategies",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33053596"
+  },
+  "item": [
+    {
+      "name": "Business",
+      "item": [
+        {
+          "name": "Create Business",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"My Store\",\n  \"outMode\": \"FIFO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/business",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "business"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Businesses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/business",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "business"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Business by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/business/{{businessId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "business",
+                "{{businessId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Configure Inventory Strategy (FIFO)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"out_mode\": \"FIFO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/business/{{businessId}}/inventory-config",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "business",
+                "{{businessId}}",
+                "inventory-config"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Configure Inventory Strategy (FEFO)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"out_mode\": \"FEFO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/business/{{businessId}}/inventory-config",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "business",
+                "{{businessId}}",
+                "inventory-config"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Configure Inventory Strategy (BATCH)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"out_mode\": \"BATCH\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/business/{{businessId}}/inventory-config",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "business",
+                "{{businessId}}",
+                "inventory-config"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"P001\",\n  \"name\": \"Product One\",\n  \"description\": \"First product\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product by ID or Code",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/products/P001",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                "P001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Product Name\",\n  \"description\": \"Updated description\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/products/{{productId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                "{{productId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "Add Inventory (Batch 01)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": \"P001\",\n  \"batch_no\": \"BATCH-01\",\n  \"quantity\": 10,\n  \"purchase_date\": \"2025-01-01\",\n  \"expiry_date\": \"2025-06-01\",\n  \"cost_price\": 100\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/inventory/inward",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inventory",
+                "inward"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Inventory (Batch 02)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": \"P001\",\n  \"batch_no\": \"BATCH-02\",\n  \"quantity\": 15,\n  \"purchase_date\": \"2025-01-15\",\n  \"expiry_date\": \"2025-05-01\",\n  \"cost_price\": 110\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/inventory/inward",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inventory",
+                "inward"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Inventory (Batch 03 - No Expiry)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": \"P001\",\n  \"batch_no\": \"BATCH-03\",\n  \"quantity\": 20,\n  \"purchase_date\": \"2025-02-01\",\n  \"cost_price\": 95\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/inventory/inward",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inventory",
+                "inward"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Inventory Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/inventory/summary?product_id=P001",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inventory",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "product_id",
+                  "value": "P001"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Inventory",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/inventory",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inventory"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Sales",
+      "item": [
+        {
+          "name": "Create Sale (FIFO/FEFO - Auto Deduction)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"business_id\": \"{{businessId}}\",\n  \"product_id\": \"P001\",\n  \"quantity\": 15\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sales",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sales"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Sale (BATCH - Specific Batch)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"business_id\": \"{{businessId}}\",\n  \"product_id\": \"P001\",\n  \"quantity\": 5,\n  \"batch_no\": \"BATCH-02\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sales",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sales"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Sale by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sales/{{saleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sales",
+                "{{saleId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Sales by Business",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sales?business_id={{businessId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sales"
+              ],
+              "query": [
+                {
+                  "key": "business_id",
+                  "value": "{{businessId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api"
+    },
+    {
+      "key": "businessId",
+      "value": ""
+    },
+    {
+      "key": "productId",
+      "value": ""
+    },
+    {
+      "key": "saleId",
+      "value": ""
+    }
+  ]
+}
