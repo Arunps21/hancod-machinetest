@@ -21,7 +21,7 @@ app.use("/api/inventory", inventoryRoutes);
 app.use("/api/sales", salesRoutes);
 app.use("/api/products", productRoutes);
 
-// Error handling middleware (must be last)
+// Error handling middleware
 app.use(errorMiddleware);
 
 // Start server

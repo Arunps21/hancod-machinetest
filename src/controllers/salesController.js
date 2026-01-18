@@ -3,10 +3,7 @@ const salesService = require("../services/salesService");
 const { successResponse } = require("../utils/response");
 const { HTTP_STATUS } = require("../config/constants");
 
-/**
- * Create a sale
- * POST /sales
- */
+// Create a sale
 const createSale = async (req, res, next) => {
   try {
     const { business_id, product_id, quantity, batch_no } = req.body;
@@ -32,10 +29,7 @@ const createSale = async (req, res, next) => {
   }
 };
 
-/**
- * Get sale by ID
- * GET /sales/:saleId
- */
+// Get sale by ID
 const getSaleById = async (req, res, next) => {
   try {
     const { saleId } = req.params;
@@ -51,10 +45,7 @@ const getSaleById = async (req, res, next) => {
   }
 };
 
-/**
- * Get all sales for a business
- * GET /sales?business_id=B001
- */
+// Get all sales for a business
 const getSalesByBusiness = async (req, res, next) => {
   try {
     const { business_id } = req.query;

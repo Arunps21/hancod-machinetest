@@ -3,12 +3,7 @@
 
 const ApiError = require("../utils/ApiError");
 
-/**
- * Get batches sorted by expiry date (earliest first), excluding expired batches
- * @param {Object} tx - Prisma transaction client
- * @param {String} productId - Product ID
- * @returns {Array} Non-expired batches sorted by expiry date ascending
- */
+// Get batches sorted by expiry date (earliest first), excluding expired batches
 const getBatches = async (tx, productId) => {
   const now = new Date();
 
@@ -27,13 +22,7 @@ const getBatches = async (tx, productId) => {
   });
 };
 
-/**
- * Execute FEFO deduction
- * @param {Object} tx - Prisma transaction client
- * @param {String} productId - Product ID
- * @param {Number} quantity - Quantity to deduct
- * @returns {Array} Deduction breakdown
- */
+// Execute FEFO deduction
 const execute = async (tx, productId, quantity) => {
   const batches = await getBatches(tx, productId);
 

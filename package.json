@@ -18,7 +18,7 @@
     "express",
     "prisma"
   ],
-  "author": "",
+  "author": "Arun PS",
   "license": "ISC",
   "description": "Production-grade inventory management system with FIFO, FEFO, and BATCH strategies",
   "devDependencies": {

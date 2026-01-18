@@ -3,12 +3,7 @@
 
 const ApiError = require("../utils/ApiError");
 
-/**
- * Get batches sorted by purchase date (oldest first)
- * @param {Object} tx - Prisma transaction client
- * @param {String} productId - Product ID
- * @returns {Array} Batches sorted by purchase date ascending
- */
+// Get batches sorted by purchase date (oldest first)
 const getBatches = async (tx, productId) => {
   return tx.inventoryBatch.findMany({
     where: {
@@ -21,13 +16,7 @@ const getBatches = async (tx, productId) => {
   });
 };
 
-/**
- * Execute FIFO deduction
- * @param {Object} tx - Prisma transaction client
- * @param {String} productId - Product ID
- * @param {Number} quantity - Quantity to deduct
- * @returns {Array} Deduction breakdown
- */
+// Execute FIFO deduction
 const execute = async (tx, productId, quantity) => {
   const batches = await getBatches(tx, productId);
 

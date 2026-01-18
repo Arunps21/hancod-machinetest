@@ -1,6 +1,6 @@
 // Product Service - Handles product operations
 const prisma = require("../config/db");
-const ApiError = require("../utils/ApiError");
+const { badRequest, notFound } = require("../utils/ApiError");
 
 // Create a new product
 const createProduct = async (data) => {
@@ -12,7 +12,7 @@ const createProduct = async (data) => {
   });
 
   if (existing) {
-    throw ApiError.badRequest(`Product with code '${code}' already exists`);
+    throw badRequest(`Product with code '${code}' already exists`);
   }
 
   return prisma.product.create({
@@ -37,7 +37,7 @@ const getProduct = async (identifier) => {
   }
 
   if (!product) {
-    throw ApiError.notFound(`Product '${identifier}' not found`);
+    throw notFound(`Product '${identifier}' not found`);
   }
 
   return product;

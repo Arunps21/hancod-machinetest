@@ -3,10 +3,7 @@ const productService = require("../services/productService");
 const { successResponse } = require("../utils/response");
 const { HTTP_STATUS } = require("../config/constants");
 
-/**
- * Create a new product
- * POST /products
- */
+// Create a new product
 const createProduct = async (req, res, next) => {
   try {
     const { code, name, description } = req.body;
@@ -26,10 +23,7 @@ const createProduct = async (req, res, next) => {
   }
 };
 
-/**
- * Get all products
- * GET /products
- */
+// Get all products
 const getAllProducts = async (req, res, next) => {
   try {
     const products = await productService.getAllProducts();
@@ -44,10 +38,7 @@ const getAllProducts = async (req, res, next) => {
   }
 };
 
-/**
- * Get product by ID or code
- * GET /products/:identifier
- */
+// Get product by ID or code
 const getProduct = async (req, res, next) => {
   try {
     const { identifier } = req.params;
@@ -63,10 +54,7 @@ const getProduct = async (req, res, next) => {
   }
 };
 
-/**
- * Update product
- * PUT /products/:id
- */
+// Update product
 const updateProduct = async (req, res, next) => {
   try {
     const { id } = req.params;

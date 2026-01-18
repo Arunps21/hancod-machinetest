@@ -3,13 +3,7 @@
 
 const ApiError = require("../utils/ApiError");
 
-/**
- * Get a specific batch by batch number
- * @param {Object} tx - Prisma transaction client
- * @param {String} productId - Product ID
- * @param {String} batchNo - Batch number
- * @returns {Object|null} The batch or null
- */
+// Get a specific batch by batch number
 const getBatch = async (tx, productId, batchNo) => {
   return tx.inventoryBatch.findFirst({
     where: {
@@ -20,14 +14,7 @@ const getBatch = async (tx, productId, batchNo) => {
   });
 };
 
-/**
- * Execute BATCH deduction from a specific batch
- * @param {Object} tx - Prisma transaction client
- * @param {String} productId - Product ID
- * @param {Number} quantity - Quantity to deduct
- * @param {String} batchNo - Specific batch number (required)
- * @returns {Array} Deduction breakdown
- */
+// Execute BATCH deduction from a specific batch
 const execute = async (tx, productId, quantity, batchNo) => {
   if (!batchNo) {
     throw ApiError.badRequest("Batch number is required for BATCH strategy");

@@ -10,11 +10,7 @@ const strategyMap = {
   [INVENTORY_STRATEGIES.BATCH]: batchStrategy,
 };
 
-/**
- * Get strategy by name
- * @param {String} strategyName - One of FIFO, FEFO, BATCH
- * @returns {Object} Strategy implementation
- */
+// Get strategy by name
 const getStrategy = (strategyName) => {
   const strategy = strategyMap[strategyName];
   if (!strategy) {
